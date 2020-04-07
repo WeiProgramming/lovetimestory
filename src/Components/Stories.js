@@ -32,7 +32,7 @@ const StoryScreen = () => {
                 // getRecordings(firebase);
                 return (
                     <div className="container">
-                        <h2 className="text-center"><strong>Story Time For Panee ^__^</strong></h2>
+                        <h2 className="text-center" style={{marginBottom: '50px'}}><strong>Story Time For Panee =^.^=</strong></h2>
                         {recordings !== null ? (Object.keys(recordings).reverse().map(recId => (
                             <div key={recId} className="row story">
                                 <div className="col-md-6">

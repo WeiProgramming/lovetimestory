@@ -27,42 +27,25 @@ class Firebase {
         console.log('saving blob', blob);
         this.storageRef.child(`${dateString}.mp3`).put(blob['blob']).then(snap => {
             console.log('uploaded', snap);
+            console.log('storage file name', snap['metadata'].name);
             snap.ref.getDownloadURL().then(url => {
                 console.log('now putting data to db');
                 // save to db after uploaded to storage
-                this.db.ref(`/recordings`).push({ "title": `${title}`, "url": `${url}`, "date": `${this.date.toDateString()}` }).then(snap => {
+                this.db.ref(`/recordings`).push({ "title": `${title}`, "url": `${url}`, "date": `${this.date.toDateString()}`, "filename": `${snap['metadata'].name}` }).then(snap => {
                     console.log('uploaded', snap.key);
                 })
             })
         });
     }
     getRecordings = () => {
-        let audioList = {};
         return this.db.ref('recordings/');
-        // .then(snap => {
-        //     console.log('get recordings', snap.val())
-        //     audioList = {...snap.val()};
-        // });
-        // this.storageRef.listAll().then(function (result) {
-        //     result.items.forEach(function (imageRef) {
-        //         // And finally display them
-        //         displayImage(imageRef);
-        //     });
-        // }).catch(function (error) {
-        //     // Handle any errors
-        // });
-        // function displayImage(imageRef) {
-        //     imageRef.getDownloadURL().then(function (url) {
-        //         // TODO: Display the image on the UI
-        //         console.log('url from get', url);
-        //         audioList.push({ "url": url })
-        //     }).catch(function (error) {
-        //         // Handle any errors
-        //     });
-        // }
-        // array of links to add right into the audio source attribute
-        // console.log('returning audio list from firebase', audioList);
-        // return audioList;
+    }
+    deleteRecording = (storageFileName, fbKey) => {
+        console.log('database fb key', fbKey);
+        this.storageRef.child(`${storageFileName}`).delete().then(res => {
+            console.log('deleted successfully, now deleting in database');
+            this.db.ref(`/recordings/${fbKey}`).remove();
+        })
     }
 }
 
