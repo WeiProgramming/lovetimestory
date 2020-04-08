@@ -70,7 +70,7 @@ const StoryScreen = () => {
                             <audio className={isPlaying ? '' : 'd-none'} ref={(input) => { audioAllRef = input }} controls="controls">
                                 <source src={recordingURLs[autoPlayIndex]} type="audio/mp3" />
                             </audio>
-                            <Button className="btn-lg" onClick={() => autoPlay()}>Play All!</Button>
+                            <button className="btn-custom" onClick={() => autoPlay()}><h1>Play All!</h1></button>
                         </div>
                         {recordings !== null ? (Object.keys(recordings).reverse().map(recId => (
                             <div key={recId} className="row story">
