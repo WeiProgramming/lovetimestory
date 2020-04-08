@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { FirebaseContext } from '../firebase/index';
-import { FaPlay, FaStop, FaPause } from 'react-icons/fa';
-import { Button } from 'react-bootstrap'
 
 const StoryScreen = () => {
     const [recordings, setRecordings] = useState(null);
@@ -63,7 +61,7 @@ const StoryScreen = () => {
                     <div className="container story-container">
                         <div className="row">
                             <div className="col-md-12">
-                                <h1 className="text-center" style={{ marginBottom: '10px' }}><strong>Story Time For Panee =^.^=</strong></h1>
+                                <h1 className="text-center page-title" style={{ marginBottom: '10px' }}><strong>Story Time For Panee =^.^=</strong></h1>
                             </div>
                         </div>
                         <div className="auto-play-container">

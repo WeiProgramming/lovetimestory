@@ -45,7 +45,7 @@ const RecordScreen = () => {
         <FirebaseContext.Consumer>
             {firebase => {
                 return (
-                    <div className="container">
+                    <div className="container-fluid">
                         <div className="row">
                             <div className="col-md-6">
                                 <div>
@@ -82,20 +82,22 @@ const RecordScreen = () => {
                                 </div>
                             </div>
                             <div className="col-md-6">
-                                {fbRecordings !== null ? (Object.keys(fbRecordings).reverse().map(recId => (
-                                    <div key={recId} className="row story">
-                                        <div className="col-md-6">
-                                            <h4>{fbRecordings[recId].title}</h4>
-                                            <small>{fbRecordings[recId].date}</small>
+                                <div className="story-container">
+                                    {fbRecordings !== null ? (Object.keys(fbRecordings).reverse().map(recId => (
+                                        <div key={recId} className="row story">
+                                            <div className="col-md-6">
+                                                <h4>{fbRecordings[recId].title}</h4>
+                                                <small>{fbRecordings[recId].date}</small>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <audio ref={(input) => { audioRef = input }} controls="controls">
+                                                    <source src={fbRecordings[recId].url} type="audio/mp3" />
+                                                </audio>
+                                                <button onClick={() => firebase.deleteRecording(fbRecordings[recId].filename, recId)}>Delete</button>
+                                            </div>
                                         </div>
-                                        <div className="col-md-6">
-                                            <audio ref={(input) => { audioRef = input }} controls="controls">
-                                                <source src={fbRecordings[recId].url} type="audio/mp3" />
-                                            </audio>
-                                            <button onClick={() => firebase.deleteRecording(fbRecordings[recId].filename, recId)}>Delete</button>
-                                        </div>
-                                    </div>
-                                ))) : <h1>Audio not found</h1>}
+                                    ))) : <h1>Audio not found</h1>}
+                                </div>
                             </div>
                         </div>
                     </div>)

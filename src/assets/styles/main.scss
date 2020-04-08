@@ -148,6 +148,18 @@ h1 {
   &:focus {outline:none}
 }
 
+.page-title {
+  margin-top: 2%;
+    margin-bottom: 25px;
+    text-align: left;
+    background-color: rgba(241,210,255,.9);
+    background-position: 50%;
+    padding: 5% 2%;
+    border-radius: 15px;
+    color: #755757;
+    width: 100%;
+    box-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
+}
 
 audio::-webkit-media-controls-panel {
   background-color: #fff;
